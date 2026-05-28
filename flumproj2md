@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Resolve script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Function to resolve absolute path
+resolve_path() {
+  local p="$1"
+  if [ -z "$p" ]; then
+    echo ""
+  elif [[ "$p" = /* ]]; then
+    echo "$p"
+  else
+    echo "$(pwd)/$p"
+  fi
+}
+
+# Parse and rewrite arguments to absolute paths
+NEW_ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --zip)
+      NEW_ARGS+=("--zip" "$(resolve_path "$2")")
+      shift 2
+      ;;
+    --zensical)
+      NEW_ARGS+=("--zensical" "$(resolve_path "$2")")
+      shift 2
+      ;;
+    --properdocs)
+      NEW_ARGS+=("--properdocs" "$(resolve_path "$2")")
+      shift 2
+      ;;
+    *)
+      NEW_ARGS+=("$1")
+      shift 1
+      ;;
+  esac
+done
+
+# Change directory to apps/admin so Node ESM resolver finds monorepo dependencies (like fflate)
+cd "$SCRIPT_DIR/private/kb-platform/apps/admin" || exit 1
+
+# Execute node CLI using absolute paths
+node --experimental-strip-types "$SCRIPT_DIR/kb-platform-exporters/cli.ts" "${NEW_ARGS[@]}"

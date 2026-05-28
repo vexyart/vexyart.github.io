@@ -1,0 +1,1 @@
+* **Save View Parameters**: This option allows you to save the settings of the current viewing area directly into the file. By doing so, you can retain and quickly access your preferred view settings the next time you open the document.

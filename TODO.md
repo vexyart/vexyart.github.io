@@ -1,0 +1,7 @@
+- [x] Re-Analyze ./private/README.md
+- [x] Analyze ./private/vexy-lines.flumproj —— these are the actual sources of the Vexy Lines help site which private/kb-platform compiles into a static site like private/vexy-lines.static
+- [x] Extend and update ./kb-platform-exporters/ so it also has a Node CLI where I could supply private/vexy-lines-20260528-1720.flumproj.zip and it would build a Zensical or ProperDocs+materialx project
+- [x] Add a simple flumproj2md wrapper that takes `--zip private/vexy-lines-20260528-1720.flumproj.zip --properdocs ./src_docs/prd/ --zensical ./src_docs/zen/` —— and this would create the Zensical and ProperDocs+materialx projects and put them in the respective directories. 
+- [x] Add a simple deploy.sh script that compiles the Zensical project and deploys it into ./docs/lines-zen/ and compiles the ProperDocs+materialx project and deploys it into ./docs/lines-prd/ 
+- [x] Run the pipelines, run a local web server rooted in ./docs/ and use browser to visually test both sites 
+- [x] into ./docs/index.html write a beautiful landing page for "Vexy: better vectors" with links to https://www.vexy.art/lines/ (but not to our -zen and -prd sites, these are internal only)

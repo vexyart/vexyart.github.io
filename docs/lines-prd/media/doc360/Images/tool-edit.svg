@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="b"
+   width="20"
+   height="16"
+   viewBox="0 0 20 16"
+   version="1.1"
+   sodipodi:docname="tool-edit.svg"
+   inkscape:version="1.3.1 (91b66b0, 2023-11-16)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="14.75"
+     inkscape:cx="1.220339"
+     inkscape:cy="8"
+     inkscape:window-width="1312"
+     inkscape:window-height="449"
+     inkscape:window-x="26"
+     inkscape:window-y="381"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="d" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">.e{stroke:#000;stroke-linecap:round;stroke-linejoin:round;}.e,.f{fill:none;}.f{opacity:.2;stroke-width:0px;}</style>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1295">
+      <path
+         d="M 0,1205.777 H 2738.234 V 0 H 0 Z"
+         transform="translate(-2236.2622,-374.55471)"
+         id="path1295" />
+    </clipPath>
+  </defs>
+  <g
+     id="c">
+    <g
+       id="d">
+      <rect
+         class="f"
+         width="20"
+         height="16"
+         id="rect3" />
+      <path
+         id="path1294"
+         d="M 0,0 C -0.02,0 -0.04,0.003 -0.059,0.01 -0.106,0.026 -0.145,0.063 -0.163,0.111 L -2.177,5.321 -4.533,3.112 C -4.566,3.082 -4.61,3.064 -4.654,3.064 -4.787,3.106 -4.828,3.169 -4.828,3.239 V 13.62 c 0,0.068 0.039,0.13 0.1,0.158 0.034,0.005 0.061,0.007 0.084,0.007 0.056,0 0.082,-0.013 0.105,-0.032 L 3.416,7.012 C 3.469,6.966 3.491,6.894 3.47,6.828 3.45,6.76 3.391,6.711 3.322,6.704 L 0.063,6.346 2.777,1.459 C 2.802,1.414 2.806,1.36 2.787,1.312 2.769,1.264 2.729,1.226 2.68,1.209 L 1.305,0.747 0.088,0.023 Z"
+         style="fill:#000000 icc-color(sRGB-IEC61966-2, 0.1, 0, 0, 0);fill-opacity:1;fill-rule:nonzero;stroke:none"
+         transform="matrix(0.9415339,0,0,-0.9415339,10.635594,14.489522)"
+         clip-path="url(#clipPath1295)" />
+    </g>
+  </g>
+</svg>

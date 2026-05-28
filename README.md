@@ -1,2 +1,2 @@
-# vexyart.github.io
-vexy.dev
+# vexy.dev
+

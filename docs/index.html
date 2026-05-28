@@ -1,1 +1,413 @@
-vexy.dev
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vexy: Better Vectors | Expressive Vector Illustration</title>
+  <meta name="description" content="Experience the next generation of vector design with Vexy. Transform raster graphics into beautiful, precise vector artwork with mesh grids, organic fills, and complete control.">
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --text-color: #f3f4f6;
+      --text-muted: #9ca3af;
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient background glow effects */
+    .glow-blob {
+      position: absolute;
+      width: 40vw;
+      height: 40vw;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: -1;
+      opacity: 0.15;
+      animation: float 20s infinite alternate;
+    }
+
+    .blob-1 {
+      top: -10vw;
+      right: -10vw;
+      background: #8b5cf6;
+    }
+
+    .blob-2 {
+      bottom: -10vw;
+      left: -10vw;
+      background: #3b82f6;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(4vw, -4vw) scale(1.1); }
+    }
+
+    header {
+      padding: 2.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-mark {
+      width: 2.2rem;
+      height: 2.2rem;
+      background: var(--primary-gradient);
+      border-radius: 0.5rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    }
+
+    .logo-mark::after {
+      content: '';
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: var(--bg-color);
+      border-radius: 0.2rem;
+      transform: rotate(45deg);
+    }
+
+    .logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      background: linear-gradient(to right, #ffffff, #d1d5db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 5% 6rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #c084fc;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .badge span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #a855f7;
+      margin-right: 0.5rem;
+      box-shadow: 0 0 10px #a855f7;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      background: linear-gradient(135deg, #ffffff 30%, #e9d5ff 70%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 5rem;
+      }
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    @media (min-width: 768px) {
+      .subtitle {
+        font-size: 1.25rem;
+      }
+    }
+
+    /* Glowing CTA Button */
+    .cta-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.5rem;
+      border-radius: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      background: var(--primary-gradient);
+      box-shadow: 0 4px 30px rgba(168, 85, 247, 0.4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #6366f1 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(168, 85, 247, 0.6);
+    }
+
+    .cta-btn:hover::before {
+      opacity: 1;
+    }
+
+    /* Features Grid */
+    .features {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 5% 8rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .features {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .icon-box {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: #a855f7;
+    }
+
+    .feature-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 4rem 5%;
+      text-align: center;
+      background-color: rgba(7, 10, 18, 0.9);
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 300;
+    }
+
+    footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: #c084fc;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Glowing backgrounds -->
+  <div class="glow-blob blob-1"></div>
+  <div class="glow-blob blob-2"></div>
+
+  <header>
+    <div class="logo-container">
+      <div class="logo-mark"></div>
+      <div class="logo-text">Vexy</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="badge">
+        <span></span>Vexy Lines User Manual
+      </div>
+      <h1>Vexy: better vectors.</h1>
+      <p class="subtitle">
+        Turn bitmaps into beautiful vector paths, curves, and textures. Design organic art with complete mesh control, complex layer masking, and state-of-the-art vector fills.
+      </p>
+      <a href="https://www.vexy.art/lines/" class="cta-btn" target="_blank" rel="noopener">Explore User Manual</a>
+    </section>
+
+    <section class="features">
+      <div class="feature-card">
+        <div class="icon-box">
+          <!-- Spiral/Waves Fill Icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            <path d="M2 12h20"></path>
+          </svg>
+        </div>
+        <h2>Advanced Fills</h2>
+        <p>Apply wave, spiral, halftone, balanced, and manual organic fills. Seamlessly integrate text and trace paths for dynamic vector texturing.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-box">
+          <!-- Mesh Grid Icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <path d="M9 3v18"></path>
+            <path d="M15 3v18"></path>
+            <path d="M3 9h18"></path>
+            <path d="M3 15h18"></path>
+          </svg>
+        </div>
+        <h2>Warp &amp; Mesh</h2>
+        <p>Deform, warp, and contour shapes with vector mesh grids. Manage mesh control points and mesh parameters with absolute mathematical precision.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-box">
+          <!-- Mask/Layers Icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h2>Masks &amp; Layers</h2>
+        <p>Isolate and mask design sections using nested groups, layers, and mask parameters. Define boundaries and gradients without altering underlying curves.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="links">
+      <a href="https://www.vexy.art/lines/" target="_blank" rel="noopener">Official Manual</a>
+      <a href="https://vexy.cc/flum-admin/" target="_blank" rel="noopener">Flum Admin</a>
+      <a href="https://blog.fontlab.com/" target="_blank" rel="noopener">FontLab Blog</a>
+    </div>
+    <p>&copy; 2026 Fontlab Ltd. All rights reserved. Vexy and Vexy Lines are trademarks of Fontlab Ltd.</p>
+  </footer>
+
+</body>
+</html>

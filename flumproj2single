@@ -1,0 +1,116 @@
+#!/usr/bin/env -S uv run -s
+# /// script
+# dependencies = ["typer", "rich"]
+# ///
+# this_file: vexy-lines2md
+
+import json
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
+
+import typer
+from rich.console import Console
+
+app = typer.Typer()
+console = Console()
+
+
+def read_manifest(flumproj_path: Path) -> Dict[str, Any]:
+    """Read and parse the manifest.json file."""
+    manifest_file = flumproj_path / "manifest.json"
+    if not manifest_file.exists():
+        console.print(f"[red]Error: manifest.json not found in {flumproj_path}[/red]")
+        raise typer.Exit(1)
+    
+    with open(manifest_file, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def get_article_path(flumproj_path: Path, chapter_slug: str, article_slug: str) -> Path:
+    """Get the full path to an article markdown file."""
+    # Articles are in articles/{chapter_slug}/{article_slug}.md
+    article_path = flumproj_path / "articles" / chapter_slug / f"{article_slug}.md"
+    if not article_path.exists():
+        console.print(f"[yellow]Warning: Article not found: {article_path}[/yellow]")
+        return None
+    return article_path
+
+
+def read_article(article_path: Path) -> str:
+    """Read an article markdown file."""
+    with open(article_path, 'r', encoding='utf-8') as f:
+        return f.read()
+
+
+def concatenate_articles(manifest: Dict[str, Any], flumproj_path: Path) -> str:
+    """Concatenate all articles in the correct order."""
+    articles_by_chapter: Dict[str, List[Dict[str, Any]]] = {}
+    
+    # Group articles by chapter
+    for article in manifest.get('articles', []):
+        chapter_slug = article.get('chapterSlug')
+        if chapter_slug not in articles_by_chapter:
+            articles_by_chapter[chapter_slug] = []
+        articles_by_chapter[chapter_slug].append(article)
+    
+    # Sort articles within each chapter by orderIndex
+    for chapter_slug in articles_by_chapter:
+        articles_by_chapter[chapter_slug].sort(key=lambda x: x.get('orderIndex', 0))
+    
+    # Sort chapters by orderIndex and concatenate articles
+    chapters = manifest.get('chapters', [])
+    chapters.sort(key=lambda x: x.get('orderIndex', 0))
+    
+    result = []
+    
+    for chapter in chapters:
+        chapter_slug = chapter.get('slug')
+        chapter_title = chapter.get('title', '')
+        
+        # Add chapter title as a heading
+        result.append(f"\n\n# {chapter_title}\n\n")
+        
+        # Add all articles in this chapter
+        if chapter_slug in articles_by_chapter:
+            for article in articles_by_chapter[chapter_slug]:
+                article_slug = article.get('slug')
+                article_title = article.get('title', '')
+                
+                # Add article title as a subheading
+                result.append(f"## {article_title}\n\n")
+                
+                # Read and append article content
+                article_path = get_article_path(flumproj_path, chapter_slug, article_slug)
+                if article_path:
+                    content = read_article(article_path)
+                    result.append(content)
+                    result.append("\n\n---\n\n")
+    
+    return ''.join(result)
+
+
+@app.command()
+def main(
+    flumproj_path: str = typer.Argument(..., help="Path to the .flumproj directory")
+):
+    """Convert a Flume project to a single concatenated Markdown file."""
+    flumproj = Path(flumproj_path)
+    
+    if not flumproj.exists():
+        console.print(f"[red]Error: Path does not exist: {flumproj}[/red]")
+        raise typer.Exit(1)
+    
+    if not flumproj.is_dir():
+        console.print(f"[red]Error: Path is not a directory: {flumproj}[/red]")
+        raise typer.Exit(1)
+    
+    manifest = read_manifest(flumproj)
+    concatenated_md = concatenate_articles(manifest, flumproj)
+    
+    # Output to stdout
+    sys.stdout.write(concatenated_md)
+
+
+if __name__ == "__main__":
+    app()

@@ -1,0 +1,1 @@
+* **Check for Updates on Startup**: This option ensures that the program automatically checks for any available updates every time it is launched. Keeping your software updated ensures you have access to the latest features and improvements.
