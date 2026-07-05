@@ -1,0 +1,52 @@
+# this_file: .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# The site is built from a private source bundle (private/*.flumproj.zip plus
+# the private kb-platform monorepo) that is not part of this repository, so CI
+# cannot regenerate docs/. Instead it validates the committed, deployed output:
+# GitHub Pages serves this repo straight from docs/, so a broken docs/ is a
+# broken site.
+jobs:
+  validate-site:
+    name: Validate published site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required Pages files exist
+        run: |
+          set -euo pipefail
+          for f in docs/index.html docs/.nojekyll docs/CNAME \
+                   docs/lines-zen/index.html docs/lines-prd/index.html; do
+            if [ ! -f "$f" ]; then
+              echo "::error::missing required file: $f"
+              exit 1
+            fi
+          done
+          echo "CNAME points at: $(cat docs/CNAME)"
+
+      - name: Check the site is non-empty
+        run: |
+          set -euo pipefail
+          count=$(find docs -name '*.html' | wc -l | tr -d ' ')
+          echo "Found $count HTML pages under docs/"
+          if [ "$count" -eq 0 ]; then
+            echo "::error::docs/ contains no HTML pages"
+            exit 1
+          fi
+
+      - name: Check the landing page for broken internal links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Scope to the hand-edited landing page. --offline checks only on-disk
+          # links. The generated lines-zen/lines-prd portals carry pre-existing
+          # broken media references from the upstream export and are content, not
+          # scaffolding, so they are out of scope here.
+          args: --offline --no-progress 'docs/index.html'
+          fail: true
